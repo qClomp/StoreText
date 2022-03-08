@@ -1,5 +1,5 @@
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 // /utilities
 import GenerateURL from "../src/utilities/GenerateURL.js"
@@ -7,10 +7,16 @@ import GenerateURL from "../src/utilities/GenerateURL.js"
 // Styled Components
 import { 
     SPageMain,
-    CRUDBox,
+    VerticalBox,
     STextBox,
     STextArea,
-    CRUDArea
+    CRUDArea,
+    SInfoBar,
+    SStatus,
+    SFileInput,
+    SSiteName,
+    SButton,
+    STextBar
  } from "../styles/StyledGlobal.js"
 
 interface IText {
@@ -21,28 +27,22 @@ interface IText {
 
 export default function PageMain() {
 
-    const [ storetext, setStoretext ] = useState<IText>({
-        url: "",
-        filename: "",
-        textdata: ""
-    })
+    const [ filename, setFilename ] = useState("")
+    const [ storetext, setStoretext ] = useState("")
+    const [ status, setStatus] = useState(Boolean)
     const [ generatedurl, setGeneratedurl ] = useState("")
 
     const checkValid = () => {
-        if(storetext.filename === "")
+        if(filename === "")
             return false
-        if(storetext.textdata === "")
+        if(storetext === "")
             return false
 
         return true
     }
 
-    const handleInput = (inEvent:any) => {
-        setStoretext({
-            ...storetext,
-            [inEvent.target.name]: inEvent.target.value
-        })
-    }
+    const Inputfilename = (inEvent:any) => { setFilename(inEvent.target.value) }
+    const Inputstoretext = (inEvent:any) => { setStoretext(inEvent.target.value) }
 
     const StoreText = async () => {
         if(checkValid() === false)
@@ -50,11 +50,9 @@ export default function PageMain() {
 
         let storedtext = {
             url: GenerateURL(5),
-            filename: storetext.filename,
-            textdata: storetext.textdata
+            filename: filename,
+            textdata: storetext
         }
-
-        console.log(JSON.stringify(storedtext))
 
         await fetch('https://localhost:7034/SText',
         {
@@ -68,44 +66,65 @@ export default function PageMain() {
             return response.json()
         })
         .then(data => {
-            console.log("Created!: ")
-            console.log(data.url)
             setGeneratedurl(data.url.toString())
+            console.log(data)
         })
-        .catch(error => console.log(error))
+        .catch(error => {})
     }
+
+    useEffect(() => {
+        if(filename !== "" && storetext !== "") { setStatus(true) } 
+        else { setStatus(false) }
+    },[filename, storetext])
 
     return(
         <SPageMain>
             <CRUDArea>
+                <SSiteName onClick={() => {}}>Store Text</SSiteName>
 
-                <CRUDBox>
-                    <label>File Name</label>
-                    <input
-                    placeholder="Insert a filename"
-                    value={storetext.filename}
-                    name="filename"
-                    onChange={(e) => handleInput(e)}
-                    />
-                    <button
-                    onClick={() => { StoreText() }}
-                    >Save & Create URL</button>
-                </CRUDBox>
+                <VerticalBox>
+                    <label>Status</label>
+                    <SStatus statuscolor={status}>
+                        { filename === "" && <span>Insert a File Name!</span> }
+                        { storetext === "" && <span>Insert a Text to Store!</span> } 
+                    </SStatus>
 
-                <CRUDBox>
-                    <h2>Import Text</h2>
-                    { generatedurl !== "" && <a>{ `http://localhost:3000/${generatedurl}` }</a> }
-                    { generatedurl }
-                </CRUDBox>
+                    <SButton
+                    onClick={() => { StoreText() }}>
+                        Save & Create URL
+                    </SButton>
+                </VerticalBox>
+
+                { generatedurl !== "" && <VerticalBox>
+                    <h2 style={{color:"green"}}>Created URL!</h2>
+                    { generatedurl !== "" && 
+                    <a>{ `http://localhost:3000/${generatedurl}` }
+                    </a> }
+                </VerticalBox> }
             </CRUDArea>
 
             <STextBox>
-                <STextArea
-                placeholder="Text In Here"
-                value={storetext.textdata}
-                name="textdata"
-                onChange={ (e) => handleInput(e)}
-                />
+                
+                <SInfoBar>
+                    <label>File Title</label>
+                    <SFileInput
+                        placeholder="Insert a File Title"
+                        value={filename}
+                        name="filename"
+                        onChange={(e) => Inputfilename(e)}
+                        />
+                </SInfoBar>
+                
+                <STextBar>
+                    <label>Text Data</label>
+                    <STextArea
+                    fontsize={""}
+                    placeholder="Text In Here"
+                    value={storetext}
+                    name="textdata"
+                    onChange={ (e) => Inputstoretext(e)}
+                    />
+                </STextBar>
             </STextBox>
 
         </SPageMain>

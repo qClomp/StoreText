@@ -10,6 +10,9 @@ import {
     SPageText, 
     STextBox,
     STextArea,
+    STextBox2,
+    SInfoBar2,
+    SInfoBar,
 } from "../styles/StyledGlobal"
 
 interface IText {
@@ -70,14 +73,14 @@ export default function PageText() {
 
     return(
         <SPageText>
-            <h1>File Name: { storetext.filename }</h1>
-
-            <STextBox>
+            <STextBox2>
+                    <h2>File Title: { storetext.filename } </h2>                    
                 <STextArea
+                fontsize={"1em"}
                 value={  ParseText() }
                 onChange={() => {}}
                 />
-            </STextBox>
+            </STextBox2>
         </SPageText>
     )
 }
