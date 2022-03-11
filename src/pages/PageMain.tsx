@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react"
 
 // /utilities
-import GenerateURL from "../src/utilities/GenerateURL.js"
+import GenerateURL from "../utilities/GenerateURL.js"
 
 // Styled Components
 import { 
@@ -54,7 +54,7 @@ export default function PageMain() {
             textdata: storetext
         }
 
-        fetch('https://localhost:7034/SText',
+        fetch('https://storetext.azurewebsites.net/SText',
         {
             method: 'POST',
             headers: {
@@ -66,7 +66,8 @@ export default function PageMain() {
             return response.json()
         })
         .then(data => {
-            setGeneratedurl(data.url.toString())
+            let url = "https://storetext.azurewebsites.net/" + data.url
+            setGeneratedurl(url)
             console.log(data)
         })
         .catch(error => {})
@@ -98,7 +99,7 @@ export default function PageMain() {
                 { generatedurl !== "" && <VerticalBox>
                     <h2 style={{color:"green"}}>Created URL!</h2>
                     { generatedurl !== "" && 
-                    <a>{ `http://localhost:3000/${generatedurl}` }
+                    <a href={generatedurl}>{ generatedurl }
                     </a> }
                 </VerticalBox> }
             </CRUDArea>

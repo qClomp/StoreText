@@ -7,12 +7,10 @@ import PageNotFound from "./PageNotFound"
 
 // Styles
 import { 
+    SFileTitle,
     SPageText, 
-    STextBox,
     STextArea,
     STextBox2,
-    SInfoBar2,
-    SInfoBar,
 } from "../styles/StyledGlobal"
 
 interface IText {
@@ -33,7 +31,7 @@ export default function PageText() {
     const routeparam = useParams()
 
     useLayoutEffect(() => {
-        let fetchurl = ("https://localhost:7034/Stext/" + routeparam.texturl)
+        let fetchurl = ("https://storetext.azurewebsites.net/Stext/" + routeparam.texturl)
 
         fetch(fetchurl)
             .then(response => {
@@ -74,7 +72,8 @@ export default function PageText() {
     return(
         <SPageText>
             <STextBox2>
-                    <h2>File Title: { storetext.filename } </h2>                    
+                    <SFileTitle>Title: { storetext.filename } </SFileTitle>  
+
                 <STextArea
                 fontsize={"1em"}
                 value={  ParseText() }

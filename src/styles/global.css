@@ -7,14 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
   /* Added */
-  background-color: #222831;
-  color: whitesmoke;
+  background-color: rgb(32, 32, 32);
+  color: rgb(255, 244, 220);
 }
 
 textarea {
   resize: none;
 }
-/* code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-} */

@@ -1,18 +1,15 @@
 
 import styled from "styled-components"
 
-const primarycolor = "rgba(168, 11, 11, 0.686)"
-const dark1 = "#222831"
-const dark2 = "#393E46"
-const bright1 = "#FFD369"
-const bright2= "#EEEEEE"
+const dark1 = "rgb(20, 20, 20)"
+const white= "#EEEEEE"
 
 export const SPageMain = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: center;
     margin-top: 2vh;
-    color: #333333;
+    color: rgb(255, 244, 220);
     `
 
 export const CRUDArea = styled.div`
@@ -21,7 +18,7 @@ export const CRUDArea = styled.div`
     `
 
 export const VerticalBox = styled.div`
-    background-color: ${bright1};
+    background-color: ${dark1};
     margin-bottom: 1em;
     display: flex;
     flex-direction: column;
@@ -36,7 +33,7 @@ export const SSiteName = styled.span`
     text-align: center;
     margin: 0.5em;
     padding: 0.2em;
-    background-color: ${bright1};
+    background-color: ${dark1};
     border-radius: 0.2em;
     cursor: pointer;
     user-select: none;
@@ -56,7 +53,7 @@ export const STextBar = styled.div`
     `
     
 export const STextBox = styled.div`
-    background-color: ${bright1};
+    background-color: ${dark1};
     width: 50%;
     height: 95vh;
     margin-left: 2vw;
@@ -70,7 +67,7 @@ interface TextAreaProps {
 }
 
 export const STextArea = styled.textarea<TextAreaProps>`
-    background-color: ${bright2};
+    background-color: ${white};
     width: 100%;
     height: 90%;
     border: 2px solid white;
@@ -86,7 +83,7 @@ export const STextArea = styled.textarea<TextAreaProps>`
     `
 
 export const SFileInput = styled.input`
-    background-color: ${bright2} ;
+    background-color: ${white} ;
     border: 1px solid gray;
     width: 60%;
     height: 70%;
@@ -128,7 +125,7 @@ export const SPageText = styled.div`
     `
 
 export const STextBox2 = styled.div`
-    background-color: ${bright1};
+    background-color: ${dark1};
     width: 50%;
     min-width: 500px;
     height: 95vh;
@@ -143,4 +140,9 @@ export const SInfoBar2 = styled.div`
     display: flex;
     flex-direction: row;
     gap: 5em;
+    `
+
+export const SFileTitle = styled.span`
+    color: rgb(255, 244, 220);
+    font-size: 2.5em;
     `
