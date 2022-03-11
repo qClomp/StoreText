@@ -54,7 +54,7 @@ export default function PageMain() {
             textdata: storetext
         }
 
-        await fetch('https://localhost:7034/SText',
+        fetch('https://localhost:7034/SText',
         {
             method: 'POST',
             headers: {
