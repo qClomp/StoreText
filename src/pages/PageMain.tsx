@@ -66,7 +66,7 @@ export default function PageMain() {
             return response.json()
         })
         .then(data => {
-            let url = "https://storetext.azurewebsites.net/" + data.url
+            let url = "https://storetext.vercel.app/" + data.url
             setGeneratedurl(url)
             console.log(data)
         })
