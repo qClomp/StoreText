@@ -54,7 +54,7 @@ export default function PageMain() {
             textdata: storetext
         }
 
-        fetch('https://storetext.azurewebsites.net/SText',
+        fetch('https://storetext2.azurewebsites.net/SText',
         {
             method: 'POST',
             headers: {

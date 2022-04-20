@@ -31,7 +31,7 @@ export default function PageText() {
     const routeparam = useParams()
 
     useLayoutEffect(() => {
-        let fetchurl = ("https://storetext.azurewebsites.net/Stext/" + routeparam.texturl)
+        let fetchurl = ("https://storetext2.azurewebsites.net/Stext/" + routeparam.texturl)
 
         fetch(fetchurl)
             .then(response => {
